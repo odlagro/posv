@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>POSV - Configurações</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-top">
+        <div>
+          <h1>Configurações</h1>
+          <p>Parâmetros de integração com Bling e Melhor Envio</p>
+        </div>
+        <div class="header-actions">
+          <a href="{{ url_for('index') }}" class="btn small">Voltar para o POSV</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="config-main">
+      <form method="post" class="config-form">
+        <section class="config-section">
+          <h2>Bling</h2>
+          <p class="muted">
+            Informe o <strong>Access Token</strong> gerado na sua conta Bling para permitir a consulta de produtos.
+          </p>
+          <label for="bling_access_token" class="label-inline">Bling Access Token:</label>
+          <textarea id="bling_access_token" name="bling_access_token" rows="4" class="config-textarea" placeholder="Cole aqui o access token do Bling">{{ cfg.bling_access_token }}</textarea>
+        </section>
+
+        <section class="config-section">
+          <h2>Melhor Envio</h2>
+          <label for="melhorenvio_token" class="label-inline">Token da API do Melhor Envio:</label>
+          <textarea id="melhorenvio_token" name="melhorenvio_token" rows="4" class="config-textarea" placeholder="Cole aqui o token da API do Melhor Envio">{{ cfg.melhorenvio_token }}</textarea>
+
+          <div class="config-grid">
+            <div>
+              <label for="origin_zip_code" class="label-inline">CEP de origem:</label>
+              <input type="text" id="origin_zip_code" name="origin_zip_code" class="config-input" placeholder="Ex: 35200000" value="{{ cfg.origin_zip_code }}">
+            </div>
+            <div>
+              <label for="melhorenvio_env" class="label-inline">Ambiente:</label>
+              <select id="melhorenvio_env" name="melhorenvio_env" class="config-input">
+                <option value="sandbox" {% if cfg.melhorenvio_env == 'sandbox' %}selected{% endif %}>Sandbox (testes)</option>
+                <option value="production" {% if cfg.melhorenvio_env == 'production' %}selected{% endif %}>Produção</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <div class="config-actions">
+          <button type="submit" class="btn">Salvar configurações</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

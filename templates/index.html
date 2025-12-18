@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<title>POSV - Consulta &amp; Vendas</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-container">
+<header class="app-header">
+<div class="header-top">
+<div>
+<h1>POSV</h1>
+<p>Sistema de consulta rápida de produtos com cálculo de frete (Bling + Melhor Envio)</p>
+<p class="muted" id="info-total-produtos"></p>
+</div>
+<div class="header-actions">
+<button class="btn small" id="btn-atualizar-cache" type="button">Atualizar cache Bling</button>
+<a class="btn small" href="{{ url_for('config_view') }}">Configurações</a>
+<a class="btn small" href="{{ url_for('bling_login') }}">Conectar Bling</a>
+</div>
+</div>
+</header>
+<main class="app-main">
+<!-- Coluna de produtos -->
+<section class="produtos-section">
+<div class="busca-container">
+<input id="busca-input" placeholder="Buscar produto pelo nome ou SKU..." type="text"/>
+<button class="btn small" id="btn-buscar-produtos" type="button">Buscar</button>
+</div>
+<div class="produtos-lista" id="produtos-lista">
+<!-- Produtos serão carregados via JS -->
+</div>
+</section>
+<!-- Coluna do carrinho / frete -->
+<section class="carrinho-section">
+<div class="carrinho-card">
+<h2>Carrinho</h2>
+<div id="carrinho-itens">
+<p class="muted">Nenhum item no carrinho.</p>
+</div>
+<div class="pacote-dados">
+<h3>Dados do pacote (para cotação)</h3>
+<div class="pacote-grid">
+<div>
+<label class="label-inline" for="pacote-width">Largura (cm)</label>
+<input class="config-input" id="pacote-width" type="text" value="11"/>
+</div>
+<div>
+<label class="label-inline" for="pacote-height">Altura (cm)</label>
+<input class="config-input" id="pacote-height" type="text" value="17"/>
+</div>
+<div>
+<label class="label-inline" for="pacote-length">Comprimento (cm)</label>
+<input class="config-input" id="pacote-length" type="text" value="11"/>
+</div>
+<div>
+<label class="label-inline" for="pacote-weight">Peso total (kg)</label>
+<input class="config-input" id="pacote-weight" type="text" value="0,50"/>
+</div>
+<div>
+<label class="label-inline" for="pacote-insurance">Valor segurado (R$)</label>
+<input class="config-input" id="pacote-insurance" type="text" value="0,00"/>
+</div>
+</div>
+</div>
+<div class="totais">
+<div class="total-linha">
+<span>Total produtos:</span>
+<span id="total-produtos">R$ 0,00</span>
+</div>
+<div class="total-linha">
+<span>Frete selecionado:</span>
+<span id="total-frete">R$ 0,00</span>
+</div>
+<div class="total-linha total-geral">
+<span>Total geral:</span>
+<span id="total-geral">R$ 0,00</span>
+</div>
+</div>
+</div>
+<div class="frete-card">
+<h2>Calcular Frete</h2>
+<div class="frete-providers">
+<label class="provider-option">
+<input checked="" name="frete-provider" type="radio" value="melhorenvio"/>
+<span class="provider-logo melhorenvio-logo">Melhor Envio</span>
+</label>
+<label class="provider-option">
+<input name="frete-provider" type="radio" value="correios"/>
+<span class="provider-logo correios-logo">Correios</span>
+</label>
+</div>
+<label class="label-inline" for="cep-destino">CEP de destino:</label>
+<input id="cep-destino" placeholder="Somente números" type="text"/>
+<button class="btn full" id="btn-calcular-frete">Calcular frete</button>
+<div class="frete-opcoes" id="frete-opcoes">
+<p class="muted">Informe o CEP e clique em "Calcular frete".</p>
+</div>
+<div class="orcamento-actions" style="margin-top:12px;">
+<button class="btn small" id="btn-gerar-orcamento" type="button">Gerar imagem do orçamento</button>
+<div id="orcamento-preview-wrap" style="display:none; margin-top:10px;">
+<div style="font-size:12px; opacity:0.85; margin-bottom:6px;">Prévia do orçamento:</div>
+<img alt="Orçamento" id="orcamento-preview" style="max-width:100%; border-radius:8px; border:1px solid rgba(255,255,255,0.08);"/>
+</div>
+</div>
+</div></section></main></div>
+
+
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

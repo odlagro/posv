@@ -1,0 +1,459 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0b0b10;
+  color: #f5f5f5;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.app-header {
+  margin-bottom: 16px;
+}
+
+.app-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.app-header p {
+  color: #aaaaaa;
+  font-size: 0.95rem;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.produtos-section,
+.carrinho-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.busca-container {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+#busca-input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #11121a;
+  color: #f5f5f5;
+}
+
+#busca-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* LISTA de produtos (ao invés de grid) */
+.produtos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.produto-card {
+  background: #151624;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #1f2933;
+}
+
+.produto-img-wrapper {
+  width: 90px;
+  height: 90px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.produto-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.produto-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.produto-titulo {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.produto-info {
+  font-size: 0.8rem;
+  color: #cccccc;
+}
+
+.produto-preco {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.btn {
+  cursor: pointer;
+  border-radius: 6px;
+  border: none;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #3b82f6;
+  color: #f5f5f5;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.btn.small {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.btn.full {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.carrinho-card,
+.frete-card {
+  background: #151624;
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #1f2933;
+}
+
+.carrinho-card h2,
+.frete-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.muted {
+  font-size: 0.8rem;
+  color: #909090;
+}
+
+.carrinho-item {
+  display: grid;
+  grid-template-columns: 1.7fr 0.6fr;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #272a3b;
+  font-size: 0.85rem;
+}
+
+.carrinho-item:last-child {
+  border-bottom: none;
+}
+
+.carrinho-item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.carrinho-item-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.carrinho-item-nome {
+  font-weight: 500;
+}
+
+.carrinho-item-preco {
+  font-size: 0.8rem;
+  color: #d1d5db;
+}
+
+.carrinho-item-subinfo {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.carrinho-item-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.carrinho-qtd-input {
+  width: 60px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  border: 1px solid #374151;
+  background: #0f172a;
+  color: #f5f5f5;
+  font-size: 0.8rem;
+}
+
+.carrinho-qtd-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.carrinho-remover {
+  background: transparent;
+  border: none;
+  color: #f97373;
+  cursor: pointer;
+  font-size: 0.78rem;
+}
+
+.carrinho-remover:hover {
+  text-decoration: underline;
+}
+
+.pacote-dados {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #272a3b;
+}
+
+.pacote-dados h3 {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.pacote-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.totais {
+  margin-top: 10px;
+  border-top: 1px solid #272a3b;
+  padding-top: 8px;
+  font-size: 0.9rem;
+}
+
+.total-linha {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.total-geral {
+  font-weight: 700;
+  color: #facc15;
+}
+
+.label-inline {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+}
+
+#cep-destino {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #374151;
+  background: #0f172a;
+  color: #f5f5f5;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+#cep-destino:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.frete-opcoes {
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+
+.frete-opcao {
+  border-top: 1px solid #272a3b;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.frete-opcao label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.frete-opcao span {
+  font-size: 0.8rem;
+}
+
+.frete-opcao-servico {
+  font-weight: 500;
+}
+
+.frete-opcao-preco {
+  color: #22c55e;
+}
+
+.frete-opcao-prazo {
+  color: #e5e7eb;
+}
+
+.frete-providers {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.provider-option {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+}
+
+.provider-logo {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #0f172a;
+  border: 1px solid #374151;
+}
+
+.melhorenvio-logo {
+  font-weight: 600;
+}
+
+.correios-logo {
+  font-weight: 600;
+}
+
+.erro-msg {
+  color: #fecaca;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* Tela de configurações */
+.config-main {
+  margin-top: 10px;
+}
+
+.config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.config-section {
+  background: #151624;
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #1f2933;
+}
+
+.config-section h2 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.config-textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 80px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #374151;
+  background: #0f172a;
+  color: #f5f5f5;
+  font-size: 0.9rem;
+}
+
+.config-input {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #374151;
+  background: #0f172a;
+  color: #f5f5f5;
+  font-size: 0.9rem;
+}
+
+.config-input:focus,
+.config-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.config-actions {
+  display: flex;
+  justify-content: flex-end;
+}

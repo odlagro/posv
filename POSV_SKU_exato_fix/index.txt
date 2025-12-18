@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>POSV - Consulta & Vendas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-top">
+        <div>
+          <h1>POSV</h1>
+          <p>Sistema de consulta rápida de produtos com cálculo de frete (Bling + Melhor Envio)</p>
+          <p id="info-total-produtos" class="muted"></p>
+        </div>
+        <div class="header-actions">
+          <button id="btn-atualizar-cache" class="btn small" type="button">Atualizar cache Bling</button>
+          <a href="{{ url_for('config_view') }}" class="btn small">Configurações</a>
+          <a href="{{ url_for('bling_login') }}" class="btn small">Conectar Bling</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- Coluna de produtos -->
+      <section class="produtos-section">
+        <div class="busca-container">
+          <input type="text" id="busca-input" placeholder="Buscar produto pelo nome ou SKU..." />
+          <button id="btn-buscar-produtos" class="btn small" type="button">Buscar</button>
+        </div>
+        <div id="produtos-lista" class="produtos-lista">
+          <!-- Produtos serão carregados via JS -->
+        </div>
+      </section>
+
+      <!-- Coluna do carrinho / frete -->
+      <section class="carrinho-section">
+        <div class="carrinho-card">
+          <h2>Carrinho</h2>
+          <div id="carrinho-itens">
+            <p class="muted">Nenhum item no carrinho.</p>
+          </div>
+
+          <div class="pacote-dados">
+            <h3>Dados do pacote (para cotação)</h3>
+            <div class="pacote-grid">
+              <div>
+                <label class="label-inline" for="pacote-width">Largura (cm)</label>
+                <input id="pacote-width" type="text" class="config-input" value="11" />
+              </div>
+              <div>
+                <label class="label-inline" for="pacote-height">Altura (cm)</label>
+                <input id="pacote-height" type="text" class="config-input" value="17" />
+              </div>
+              <div>
+                <label class="label-inline" for="pacote-length">Comprimento (cm)</label>
+                <input id="pacote-length" type="text" class="config-input" value="11" />
+              </div>
+              <div>
+                <label class="label-inline" for="pacote-weight">Peso total (kg)</label>
+                <input id="pacote-weight" type="text" class="config-input" value="0,50" />
+              </div>
+              <div>
+                <label class="label-inline" for="pacote-insurance">Valor segurado (R$)</label>
+                <input id="pacote-insurance" type="text" class="config-input" value="0,00" />
+              </div>
+            </div>
+          </div>
+
+          <div class="totais">
+            <div class="total-linha">
+              <span>Total produtos:</span>
+              <span id="total-produtos">R$ 0,00</span>
+            </div>
+            <div class="total-linha">
+              <span>Frete selecionado:</span>
+              <span id="total-frete">R$ 0,00</span>
+            </div>
+            <div class="total-linha total-geral">
+              <span>Total geral:</span>
+              <span id="total-geral">R$ 0,00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="frete-card">
+          <h2>Calcular Frete</h2>
+
+          <div class="frete-providers">
+            <label class="provider-option">
+              <input type="radio" name="frete-provider" value="melhorenvio" checked />
+              <span class="provider-logo melhorenvio-logo">Melhor Envio</span>
+            </label>
+            <label class="provider-option">
+              <input type="radio" name="frete-provider" value="correios" />
+              <span class="provider-logo correios-logo">Correios</span>
+            </label>
+          </div>
+
+          <label for="cep-destino" class="label-inline">CEP de destino:</label>
+          <input type="text" id="cep-destino" placeholder="Somente números" />
+
+          <button id="btn-calcular-frete" class="btn full">Calcular frete</button>
+
+          <div id="frete-opcoes" class="frete-opcoes">
+            <p class="muted">Informe o CEP e clique em "Calcular frete".</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

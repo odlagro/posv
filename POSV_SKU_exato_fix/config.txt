@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>POSV - Configurações</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-top">
+        <div>
+          <h1>Configurações</h1>
+          <p>Parâmetros de integração com Bling e Melhor Envio</p>
+        </div>
+        <div class="header-actions">
+          <a href="{{ url_for('index') }}" class="btn small">Voltar para o POSV</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="config-main">
+      <form method="post" class="config-form">
+        <section class="config-section">
+          <h2>Bling (OAuth)</h2>
+
+          {% if bling_conectado %}
+            <p class="muted">Status: <strong>Conectado</strong> ✅</p>
+          {% else %}
+            <p class="muted">Status: <strong>Não conectado</strong> ⚠️</p>
+          {% endif %}
+
+          <p class="muted" style="margin-top:6px;">
+            A conexão com o Bling é feita via <strong>OAuth</strong>.
+            Clique em <strong>Conectar Bling</strong> para abrir a tela de login do Bling e autorizar o aplicativo.
+            O POSV salva automaticamente os tokens em <code>posv_config.json</code>.
+          </p>
+
+          <div class="header-actions" style="margin-top:10px;">
+            <a href="{{ url_for('bling_login') }}" class="btn small">Conectar Bling</a>
+          </div>
+        </section>
+
+        <section class="config-section">
+          <h2>Melhor Envio</h2>
+          <label for="melhorenvio_token" class="label-inline">Token da API do Melhor Envio:</label>
+          <textarea id="melhorenvio_token" name="melhorenvio_token" rows="4" class="config-textarea" placeholder="Cole aqui o token da API do Melhor Envio">{{ cfg.melhorenvio_token }}</textarea>
+
+          <div class="config-grid">
+            <div>
+              <label for="origin_zip_code" class="label-inline">CEP de origem:</label>
+              <input type="text" id="origin_zip_code" name="origin_zip_code" class="config-input" placeholder="Ex: 35200000" value="{{ cfg.origin_zip_code }}">
+            </div>
+            <div>
+              <label for="melhorenvio_env" class="label-inline">Ambiente:</label>
+              <select id="melhorenvio_env" name="melhorenvio_env" class="config-input">
+                <option value="sandbox" {% if cfg.melhorenvio_env == 'sandbox' %}selected{% endif %}>Sandbox (testes)</option>
+                <option value="production" {% if cfg.melhorenvio_env == 'production' %}selected{% endif %}>Produção</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <div class="config-actions">
+          <button type="submit" class="btn">Salvar configurações</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
